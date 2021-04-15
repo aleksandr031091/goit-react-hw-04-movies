@@ -1,7 +1,7 @@
 const routes = {
   home: "/",
   movies: "/movies",
-  movieDetailsPage: "/movieDetailsPage",
+  movieDetailsPage: "/movies/:movieId",
 };
 
 export default routes;

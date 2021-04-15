@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import routes from "../routes/Routes";
 import { searchTrandMouve } from "../service/movieApi";
+// import MovieList from "../components/movieList";
 
 class HomePages extends Component {
   state = {
@@ -19,16 +21,17 @@ class HomePages extends Component {
     return (
       <>
         <h1>Trending today</h1>
+        {/* <MovieList tranding={tranding} /> */}
         <ul>
           {tranding.map((item) => (
             <li key={item.id}>
               <Link
                 to={{
-                  pathname: `/movieDetailsPage/${item.id}`,
+                  pathname: `${routes.movieDetailsPage}/${item.id}`,
                   state: { from: this.props.location },
                 }}
               >
-                {item.title}
+                {item.title || item.name}
               </Link>
             </li>
           ))}
