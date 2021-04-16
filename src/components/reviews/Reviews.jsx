@@ -11,9 +11,7 @@ class MouvesReviews extends Component {
           reviews: reviews,
         });
       })
-      .catch((error) => {
-        this.setState({ error });
-      });
+      .catch((error) => console.log(error));
   }
   render() {
     const { review } = this.state;

@@ -9,9 +9,7 @@ class MoviesCredits extends Component {
           credits: credits,
         });
       })
-      .catch((error) => {
-        this.setState({ error });
-      });
+      .catch((error) => console.log(error));
   }
   render() {
     return <></>;

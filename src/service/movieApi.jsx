@@ -19,7 +19,7 @@ export const searchMouves = (query) => {
 export const searchMouvesDetails = (id) => {
   const API = `https://api.themoviedb.org/3/movie/${id}?api_key=${KEY}&language=en-US`;
   return axios.get(API).then((resolve) => {
-    return resolve;
+    return resolve.data;
   });
 };
 
