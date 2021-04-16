@@ -47,14 +47,7 @@ class MouvieDetailsPage extends Component {
         <button type="button" onClick={this.goBack}>
           go back
         </button>
-        <div>
-          {!!poster_path && (
-            <img
-              src={searchMouvesDetails.posterimgpath + poster_path}
-              alt={title}
-            />
-          )}
-        </div>
+        <div>{!!poster_path && <img src="#" alt={title} />}</div>
         <div>
           <h1>
             {title} ({releaseYear})

@@ -26,13 +26,13 @@ export const searchMouvesDetails = (id) => {
 export const searchMouvesCredits = (id) => {
   const API = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${KEY}&language=en-US`;
   return axios.get(API).then((resolve) => {
-    return resolve;
+    return resolve.data;
   });
 };
 
 export const searchMouvesReviews = (id) => {
   const API = `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${KEY}&language=en-US&page=1`;
   return axios.get(API).then((resolve) => {
-    return resolve;
+    return resolve.data;
   });
 };

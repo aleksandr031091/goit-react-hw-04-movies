@@ -6,17 +6,29 @@ class MouvesReviews extends Component {
 
   componentDidMount() {
     searchMouvesReviews(this.props.match.params.movieId)
-      .then((reviews) => {
+      .then(({ data }) => {
         this.setState({
-          reviews: reviews,
+          reviews: data.results,
         });
       })
       .catch((error) => console.log(error));
   }
   render() {
-    const { review } = this.state;
-    console.log(review);
-    return <></>;
+    const { reviews } = this.state;
+
+    return (
+      <div>
+        <ul>
+          {reviews.map((review) => (
+            <li key={review.id}>
+              <p>Author:{review.author}</p>
+              <p>{review.content}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   }
 }
+
 export default MouvesReviews;
