@@ -11,9 +11,9 @@ class HomePages extends Component {
   };
 
   componentDidMount = () => {
-    searchTrandMouve().then(({ data }) =>
-      this.setState({ tranding: data.results })
-    );
+    searchTrandMouve()
+      .then(({ data }) => this.setState({ tranding: data.results }))
+      .catch((error) => console.log(error));
   };
 
   render() {

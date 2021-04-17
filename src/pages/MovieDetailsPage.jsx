@@ -2,12 +2,12 @@ import { Component, lazy, Suspense } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { searchMouvesDetails } from "../service/movieApi";
 import { posterimgpath } from "../service/movieApi";
-// import MoviesCredits from "../components/cast";
-// import MouvesReviews from "../components/reviews";
+import MoviesCredits from "../components/cast";
+import MouvesReviews from "../components/reviews";
 import scss from "./Page.module.scss";
 
-const MoviesCredits = lazy(() => import("../components/cast"));
-const MouvesReviews = lazy(() => import("../components/reviews"));
+// const MoviesCredits = lazy(() => import("../components/cast"));
+// const MouvesReviews = lazy(() => import("../components/reviews"));
 
 class MouvieDetailsPage extends Component {
   state = {
@@ -31,7 +31,7 @@ class MouvieDetailsPage extends Component {
   }
 
   goBack() {
-    this.props.history.goBack();
+    this.props.history.push(this.props.location.search);
   }
 
   render() {
@@ -81,22 +81,31 @@ class MouvieDetailsPage extends Component {
         </div>
         <p>Additional information</p>
         <ul className={scss.information}>
-          <Link className={scss.item} to={{ pathname: `/movies/${id}/Cast` }}>
+          <Link
+            className={scss.item}
+            to={{ pathname: `${this.props.match.url}/Cast` }}
+          >
             Cast
           </Link>
           <Link
             className={scss.item}
-            to={{ pathname: `/movies/${id}/reviews` }}
+            to={{ pathname: `${this.props.match.url}/reviews` }}
           >
             Reviews
           </Link>
         </ul>
-        <Suspense fallback={<p>...Loading</p>}>
-          <Switch>
-            <Route path="/movies/:movieId/cast" component={MoviesCredits} />
-            <Route path="/movies/:movieId/reviews" component={MouvesReviews} />
-          </Switch>
-        </Suspense>
+        {/* <Suspense fallback={<p>...Loading</p>}> */}
+        <Switch>
+          <Route
+            path={`${this.props.match.path}/cast`}
+            component={MoviesCredits}
+          />
+          <Route
+            path={`${this.props.match.path}/reviews`}
+            component={MouvesReviews}
+          />
+        </Switch>
+        {/* </Suspense> */}
       </div>
     );
   }
