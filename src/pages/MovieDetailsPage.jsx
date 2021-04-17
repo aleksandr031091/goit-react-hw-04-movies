@@ -4,6 +4,7 @@ import { searchMouvesDetails } from "../service/movieApi";
 import MoviesCredits from "../components/cast";
 import MouvesReviews from "../components/reviews";
 import { posterimgpath } from "../service/movieApi";
+import scss from "./Page.module.scss";
 
 class MouvieDetailsPage extends Component {
   state = {
@@ -13,7 +14,7 @@ class MouvieDetailsPage extends Component {
   };
 
   componentDidMount() {
-    console.log(this.props.match.params.movieId);
+    // console.log(this.props.match.params.movieId);
     searchMouvesDetails(this.props.match.params.movieId)
       .then((movie) => {
         this.setState({ movie: movie });
@@ -48,32 +49,45 @@ class MouvieDetailsPage extends Component {
     return (
       <div>
         <button type="button" onClick={this.goBack}>
-          go back
+          Go back
         </button>
-        <div>
-          {!!poster_path && (
-            <img src={posterimgpath + poster_path} alt={title} />
-          )}
+        <div className={scss.movieDescriptionList}>
+          <div className={scss.imgBox}>
+            {!!poster_path && (
+              <img
+                className={scss.image}
+                src={posterimgpath + poster_path}
+                alt={title}
+              />
+            )}
+          </div>
+          <div>
+            <h1>
+              {title} ({releaseYear})
+            </h1>
+            <p>User Score: {vote_average * 10}%</p>
+            <h3>Overview</h3>
+            <p>{overview}</p>
+            <h4>genres</h4>
+            <ul className={scss.listGanres}>
+              {genres.map((genre) => (
+                <li key={genre.id}>{genre.name}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div>
-          <h1>
-            {title} ({releaseYear})
-          </h1>
-          <p>User Score: {vote_average * 10}%</p>
-          <h3>Overview</h3>
-          <p>{overview}</p>
-          <p>genres</p>
-          <ul>
-            {genres.map((genre) => (
-              <li key={genre.id}>{genre.name}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p>Additional information</p>
-          <Link to={{ pathname: `/movies/${id}/Cast` }}>Cast</Link>
-          <Link to={{ pathname: `/movies/${id}/reviews` }}>Reviews</Link>
-        </div>
+        <p>Additional information</p>
+        <ul className={scss.information}>
+          <Link className={scss.item} to={{ pathname: `/movies/${id}/Cast` }}>
+            Cast
+          </Link>
+          <Link
+            className={scss.item}
+            to={{ pathname: `/movies/${id}/reviews` }}
+          >
+            Reviews
+          </Link>
+        </ul>
         <Switch>
           <Route path="/movies/:movieId/cast" component={MoviesCredits} />
           <Route path="/movies/:movieId/reviews" component={MouvesReviews} />

@@ -23,8 +23,14 @@ class SearchBar extends Component {
   render() {
     const { query } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" value={query} onChange={this.handleChange} />
+      <form className={scss.form} onSubmit={this.handleSubmit}>
+        <input
+          className={scss.input}
+          type="text"
+          value={query}
+          onChange={this.handleChange}
+          placeholder="add movie"
+        />
         <button>Search</button>
       </form>
     );

@@ -1,0 +1,11 @@
+.list {
+  list-style: none;
+}
+.listItem {
+  color: rgb(0, 68, 255);
+  text-decoration: none;
+
+  &:hover {
+    color: rgb(211, 54, 54);
+  }
+}

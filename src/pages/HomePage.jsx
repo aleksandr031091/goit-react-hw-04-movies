@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import routes from "../routes/Routes";
 import { searchTrandMouve } from "../service/movieApi";
+import scss from "./Page.module.scss";
 // import MovieList from "../components/movieList";
 
 class HomePages extends Component {
@@ -17,16 +18,16 @@ class HomePages extends Component {
 
   render() {
     const { tranding } = this.state;
-    console.log(tranding);
+    // console.log(tranding);
     return (
       <>
         <h1>Trending today</h1>
         {/* <MovieList tranding={tranding} /> */}
-        <ul>
+        <ul className={scss.list}>
           {tranding.map((item) => (
             <li key={item.id}>
-              {/* {console.log(item.id)} */}
               <Link
+                className={scss.listItem}
                 to={{
                   pathname: `${routes.movies}/${item.id}`,
                   state: { from: this.props.location },
