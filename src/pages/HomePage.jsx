@@ -25,9 +25,10 @@ class HomePages extends Component {
         <ul>
           {tranding.map((item) => (
             <li key={item.id}>
+              {/* {console.log(item.id)} */}
               <Link
                 to={{
-                  pathname: `${routes.movieDetailsPage}/${item.id}`,
+                  pathname: `${routes.movies}/${item.id}`,
                   state: { from: this.props.location },
                 }}
               >

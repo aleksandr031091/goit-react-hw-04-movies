@@ -3,6 +3,7 @@ import { Route, Switch, Link } from "react-router-dom";
 import { searchMouvesDetails } from "../service/movieApi";
 import MoviesCredits from "../components/cast";
 import MouvesReviews from "../components/reviews";
+import { posterimgpath } from "../service/movieApi";
 
 class MouvieDetailsPage extends Component {
   state = {
@@ -12,6 +13,7 @@ class MouvieDetailsPage extends Component {
   };
 
   componentDidMount() {
+    console.log(this.props.match.params.movieId);
     searchMouvesDetails(this.props.match.params.movieId)
       .then((movie) => {
         this.setState({ movie: movie });
@@ -23,6 +25,7 @@ class MouvieDetailsPage extends Component {
     super(props);
     this.goBack = this.goBack.bind(this);
   }
+
   goBack() {
     this.props.history.goBack();
   }
@@ -41,13 +44,17 @@ class MouvieDetailsPage extends Component {
     if (!!release_date) {
       releaseYear = release_date.substring(0, 4);
     }
-    console.log(title);
+
     return (
       <div>
         <button type="button" onClick={this.goBack}>
           go back
         </button>
-        <div>{!!poster_path && <img src="#" alt={title} />}</div>
+        <div>
+          {!!poster_path && (
+            <img src={posterimgpath + poster_path} alt={title} />
+          )}
+        </div>
         <div>
           <h1>
             {title} ({releaseYear})
@@ -68,7 +75,7 @@ class MouvieDetailsPage extends Component {
           <Link to={{ pathname: `/movies/${id}/reviews` }}>Reviews</Link>
         </div>
         <Switch>
-          <Route path="/movies/:movieId/credits" component={MoviesCredits} />
+          <Route path="/movies/:movieId/cast" component={MoviesCredits} />
           <Route path="/movies/:movieId/reviews" component={MouvesReviews} />
         </Switch>
       </div>
