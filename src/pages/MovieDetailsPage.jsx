@@ -1,10 +1,13 @@
-import { Component } from "react";
+import { Component, lazy, Suspense } from "react";
 import { Route, Switch, Link } from "react-router-dom";
 import { searchMouvesDetails } from "../service/movieApi";
-import MoviesCredits from "../components/cast";
-import MouvesReviews from "../components/reviews";
 import { posterimgpath } from "../service/movieApi";
+// import MoviesCredits from "../components/cast";
+// import MouvesReviews from "../components/reviews";
 import scss from "./Page.module.scss";
+
+const MoviesCredits = lazy(() => import("../components/cast"));
+const MouvesReviews = lazy(() => import("../components/reviews"));
 
 class MouvieDetailsPage extends Component {
   state = {
@@ -88,10 +91,12 @@ class MouvieDetailsPage extends Component {
             Reviews
           </Link>
         </ul>
-        <Switch>
-          <Route path="/movies/:movieId/cast" component={MoviesCredits} />
-          <Route path="/movies/:movieId/reviews" component={MouvesReviews} />
-        </Switch>
+        <Suspense fallback={<p>...Loading</p>}>
+          <Switch>
+            <Route path="/movies/:movieId/cast" component={MoviesCredits} />
+            <Route path="/movies/:movieId/reviews" component={MouvesReviews} />
+          </Switch>
+        </Suspense>
       </div>
     );
   }
