@@ -3,6 +3,7 @@ import axios from "axios";
 const KEY = "076b6abc8ec9f9bff97e57acf85d276e";
 
 export const posterimgpath = `https://image.tmdb.org/t/p/w342/`;
+export const profilepath = "https://image.tmdb.org/t/p/w185";
 
 export const searchTrandMouve = () => {
   const API = `https://api.themoviedb.org/3/trending/movie/day?api_key=${KEY}`;
