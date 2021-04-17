@@ -9,6 +9,7 @@ const Header = () => {
           <ul className={scss.list}>
             <li>
               <NavLink
+                exact
                 className={scss.listItem}
                 activeClassName={scss.activListItem}
                 to="/"
@@ -18,6 +19,7 @@ const Header = () => {
             </li>
             <li>
               <NavLink
+                exact
                 className={scss.listItem}
                 activeClassName={scss.activListItem}
                 to="/movies"
